@@ -11,25 +11,33 @@ repositories {
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.4.3'
-    compile ( "com.orientechnologies:orientdb-graphdb:2.0.8" ) { exclude module:'commons-logging' }
+    compile 'org.codehaus.groovy:groovy-all'
+    compile ( 'com.orientechnologies:orientdb-graphdb' ) { exclude module:'commons-logging' }
     compile 'org.apache.commons:commons-math3:3.5'
-    compile 'org.slf4j:slf4j-api:1.7.12'
-    compile 'org.slf4j:slf4j-ext:1.7.12'
+    compile 'org.slf4j:slf4j-api'
+    compile 'org.slf4j:slf4j-ext'
 
-    runtime 'org.slf4j:jcl-over-slf4j:1.7.12'
-    runtime 'org.slf4j:log4j-over-slf4j:1.7.12'
+    runtime 'org.slf4j:jcl-over-slf4j'
+    runtime 'org.slf4j:log4j-over-slf4j'
     runtime 'ch.qos.logback:logback-classic:1.1.3'
 
     testCompile 'junit:junit:4.11'
     testCompile 'org.hamcrest:hamcrest-core:1.3'
 }
 
-// Ensure everything's using the same version of Groovy
+// Ensure everything's using the same version of Groovy, Orient, SLF4J
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        if (details.requested.group == 'org.codehaus.groovy') {
-            details.useVersion '2.4.3'
+        switch (details.requested.group) {
+            case 'org.codehaus.groovy' :
+                details.useVersion '2.4.3'
+                break
+            case 'com.orientechnologies' :
+                details.useVersion '2.0.9'
+                break
+            case 'org.slf4j' :
+                details.useVersion '1.7.12'
+                break
         }
     }
 }
