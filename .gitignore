@@ -3,8 +3,8 @@
 build/
 
 # Eclipse
-.classpath
-.project
+.classpath*
+.project*
 .settings/
 bin/
 
@@ -17,6 +17,6 @@ bin/
 # Application
 *.log
 
-#Temporary
+# Temporary
 ~*
 .DS_Store

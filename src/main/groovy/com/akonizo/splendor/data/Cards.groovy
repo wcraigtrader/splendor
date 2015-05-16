@@ -1,5 +1,9 @@
 package com.akonizo.splendor.data
 
+import static com.xlson.groovycsv.CsvParser.parseCsv
+import groovy.util.logging.Slf4j
+
+@Slf4j
 class Cards {
 
     static final String WHITE = 'WHITE'
@@ -8,57 +12,42 @@ class Cards {
     static final String RED = 'RED'
     static final String BLACK = 'BLACK'
     static final String GOLD = 'GOLD'
-    
+
     Set<Card> cards = new HashSet<Card>()
-    
+
     Cards() {
-        init()
+        load(new InputStreamReader(getClass().classLoader.getResourceAsStream('cards.csv')))
+    }
+
+    void load(String data) {
+        load( new StringReader( data ) )
     }
     
-    def init() {
-        add BLUE, BLUE, 'WWWWWWWBBB', 5
-        add BLUE, BLUE, 'WWWWWWW', 4
-        add BLUE, BLUE, 'WWWWWWBBBKKK', 4
-        add BLUE, BLUE, 'WWWGGGRRRKKKKK', 3
-        add BLUE, GREEN, 'BBBBBBBGGG', 5
-        add BLUE, GREEN, 'BBBBBBB', 4
-        add BLUE, GREEN, 'WWWBBBBBBGGG', 4
-        add BLUE, GREEN, 'WWWWWBBBRRRKKK', 3
-        add BLUE, RED, 'GGGGGGGRRR', 5
-        add BLUE, RED, 'GGGGGGG', 4
-        add BLUE, RED, 'BBBGGGGGGRRR', 4
-        add BLUE, RED, 'WWWBBBBBGGGKKK', 3
-        add BLUE, BLACK, 'RRRRRRRKKK', 5
-        add BLUE, BLACK, 'RRRRRRR', 4
-        add BLUE, BLACK, 'GGGRRRRRRKKK', 4
-        add BLUE, BLACK, 'WWWBBBGGGGGRRR', 3
-        add BLUE, WHITE, 'WWWKKKKKKK', 5
-        add BLUE, WHITE, 'KKKKKKK', 4
-        add BLUE, WHITE, 'WWWRRRKKKKKK', 4
-        add BLUE, WHITE, 'BBBGGGRRRRRKKK', 3
-        
-        add GOLD, BLACK, 'WWWGGGKK', 1
-        add GOLD, RED, 'BBBRRKKK', 1
-        add GOLD, GREEN, 'WWWGGRRR', 1
-        add GOLD, BLUE, 'BBGGGKKK', 1
-        add GOLD, WHITE, 'WWBBBRRR', 1
-        add GOLD, RED, 'WWRRKKK', 1
-        add GOLD, BLUE, 'BBGGRRR', 1
-        add GOLD, WHITE, 'GGGRRKK', 1
-        add GOLD, GREEN, 'WWBBBKK', 1
-        add GOLD, BLACK, 'WWWBBGG', 1
-        add GOLD, BLUE, 'WWRKKKK', 2
-        
-    }
-    
-    def add( String r, String p, String cost, int value=0 ) {
-        
+    void load(Reader stream) {
+        def data = parseCsv(stream, autoDetect:true)
+        for (card in data) {
+            cards.add( new Card( card.deck, card.produces, card.requires, card.value ) )
+        }
     }
 }
 
-class Card {}
+class Card {
 
-enum Rank {
+    Deck deck
+    Color provides
+    String requires
+    int value
+
+    Card( String d, String p, String r, String v='') {
+        deck = Deck.values()[Integer.valueOf( d )-1]
+        provides = p.toUpperCase() as Color
+        requires = r
+        value = v ? Integer.valueOf( v ) : 0
+        assert 0 <= value && value <= 5
+    }
+}
+
+enum Deck {
     GREEN, GOLD, BLUE
 }
 
@@ -68,10 +57,27 @@ enum Color {
     GREEN( 'G' ),
     RED( 'R' ),
     BLACK( 'K' )
+
+    final char abbrev
+
+    static final Map map
+
+    static {
+        map = [:] as HashMap
+        values().each { color ->
+            map.put( (Character) color.abbrev, color )
+        }
+    }
+
+    Color( String a ) {
+        this.abbrev = a[0]
+    }
+
+    static get( String id ) {
+        return get( (char) id[0] )
+    }
     
-    private final char abbrev
-    
-    Color( char a ) {
-        this.abbrev = a
+    static get( Character id ) {
+        return map[ id.toUpperCase() ]
     }
 }
