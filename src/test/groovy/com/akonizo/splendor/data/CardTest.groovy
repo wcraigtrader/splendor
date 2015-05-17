@@ -9,13 +9,13 @@ class CardTest extends Specification {
             Card card = new Card( '1', 'Black', 'WBGR' )
         then:
             Deck.GREEN == card.deck
-            Color.BLACK == card.provides
+            Gem.BLACK == card.provides
             0 == card.value
-            1 == card.counts[Color.WHITE]
-            1 == card.counts[Color.BLUE]
-            1 == card.counts[Color.GREEN]
-            1 == card.counts[Color.RED]
-            0 == card.counts[Color.BLACK]
+            1 == card.counts[Gem.WHITE]
+            1 == card.counts[Gem.BLUE]
+            1 == card.counts[Gem.GREEN]
+            1 == card.counts[Gem.RED]
+            0 == card.counts[Gem.BLACK]
     }
 
     def "Create card with value"() {
@@ -23,13 +23,13 @@ class CardTest extends Specification {
             Card card = new Card( '3','Black','WWWBBBGGGGGRRR','3')
         then:
             Deck.BLUE == card.deck
-            Color.BLACK == card.provides
+            Gem.BLACK == card.provides
             3 == card.value
-            3 == card.counts[Color.WHITE]
-            3 == card.counts[Color.BLUE]
-            5 == card.counts[Color.GREEN]
-            3 == card.counts[Color.RED]
-            0 == card.counts[Color.BLACK]
+            3 == card.counts[Gem.WHITE]
+            3 == card.counts[Gem.BLUE]
+            5 == card.counts[Gem.GREEN]
+            3 == card.counts[Gem.RED]
+            0 == card.counts[Gem.BLACK]
     }
 
 }

@@ -2,29 +2,29 @@ package com.akonizo.splendor.data
 
 import spock.lang.Specification
 
-class ColorTest extends Specification {
+class GemTest extends Specification {
 
-    def "Check Colors enumeration"() {
+    def "Check Gem enumeration"() {
         expect:
-            Color.WHITE < Color.BLUE
-            Color.BLUE < Color.GREEN
-            Color.GREEN < Color.RED
-            Color.RED < Color.BLACK
+            Gem.WHITE < Gem.BLUE
+            Gem.BLUE < Gem.GREEN
+            Gem.GREEN < Gem.RED
+            Gem.RED < Gem.BLACK
     
-            Color.WHITE == 'WHITE' as Color
-            Color.BLUE == 'BLUE' as Color
-            Color.GREEN == 'GREEN' as Color
-            Color.RED == 'RED' as Color
-            Color.BLACK == 'BLACK' as Color
+            Gem.WHITE == 'WHITE' as Gem
+            Gem.BLUE == 'BLUE' as Gem
+            Gem.GREEN == 'GREEN' as Gem
+            Gem.RED == 'RED' as Gem
+            Gem.BLACK == 'BLACK' as Gem
     
-            Color.WHITE == Color.get( 'W' )
-            Color.BLUE == Color.get( 'B' )
-            Color.BLUE == Color.get( 'b' )
-            Color.BLUE == Color.get( (char) 'B' )
-            Color.BLUE == Color.get( (char) 'b' )
-            Color.GREEN == Color.get( 'G' )
-            Color.RED == Color.get( 'R' )
-            Color.BLACK == Color.get( 'K' )
+            Gem.WHITE == Gem.get( 'W' )
+            Gem.BLUE == Gem.get( 'B' )
+            Gem.BLUE == Gem.get( 'b' )
+            Gem.BLUE == Gem.get( (char) 'B' )
+            Gem.BLUE == Gem.get( (char) 'b' )
+            Gem.GREEN == Gem.get( 'G' )
+            Gem.RED == Gem.get( 'R' )
+            Gem.BLACK == Gem.get( 'K' )
     }
 
 }

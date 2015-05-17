@@ -1,6 +1,6 @@
 package com.akonizo.splendor.data
 
-enum Color {
+enum Gem {
     WHITE( 'W' ),
     BLUE( 'B' ),
     GREEN( 'G' ),
@@ -18,7 +18,7 @@ enum Color {
         }
     }
 
-    Color( String a ) {
+    Gem ( String a ) {
         this.abbrev = a[0]
     }
 
