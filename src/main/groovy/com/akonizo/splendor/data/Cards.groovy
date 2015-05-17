@@ -7,12 +7,15 @@ import com.xlson.groovycsv.CsvParser
 @Slf4j
 class Cards {
 
+    /** Set of loaded cards */
     Set<Card> cards = new HashSet<Card>()
 
+    /** Load cards from a String */
     void load(String data) {
         load( new StringReader( data ) )
     }
 
+    /** Load cards from a Reader */
     void load(Reader stream) {
         log.info( "Clearing stored cards" )
         cards.clear()
@@ -24,7 +27,8 @@ class Cards {
         }
     }
     
-    static Cards getAll() {
+    /** Load all cards from Splendor */
+    static Cards getSplendor() {
         Cards all = new Cards()
         all.load(new InputStreamReader(Cards.class.classLoader.getResourceAsStream('cards.csv')))
         return all

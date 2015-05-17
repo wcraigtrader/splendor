@@ -4,22 +4,39 @@ import spock.lang.Specification
 
 class CardsTest extends Specification {
 
-    def "Create some cards from String"() {
+    Cards c
+
+    def setup() {
+        c = new Cards()
+    }
+
+    def "Test initial conditions"() {
+        expect:
+            0 == c.cards.size()
+    }
+
+    def "Create cards from an empty string"() {
         when:
-            Cards c = new Cards()
+            c.load("")
+        then:
+            0 == c.cards.size()
+    }
+
+    def "Create some cards from a string"() {
+        when:
             c.load( """deck,produces,requires,value
 3,Black,RRRRRRRKKK,5
 3,Blue,WWWWWWWBBB,5
 """ )
         then:
             2 == c.cards.size()
-            new Card( Deck.BLUE, Color.BLACK, 'RRRRRRRKKK', 5 ) in c.cards
+            new Card( Deck.BLUE, Gem.BLACK, 'RRRRRRRKKK', 5 ) in c.cards
             new Card( '3', 'Blue', 'WWWWWWWBBB', '5' ) in c.cards
     }
 
-    def "Create all cards from data file"() {
+    def "Create all cards for Splendor"() {
         when:
-            Cards c = Cards.getAll()
+            c = Cards.getSplendor()
         then:
             90 == c.cards.size()
     }
