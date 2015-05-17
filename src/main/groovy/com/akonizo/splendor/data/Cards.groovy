@@ -10,18 +10,7 @@ import groovy.util.logging.Slf4j
 @Slf4j
 class Cards {
 
-    static final String WHITE = 'WHITE'
-    static final String BLUE = 'BLUE'
-    static final String GREEN = 'GREEN'
-    static final String RED = 'RED'
-    static final String BLACK = 'BLACK'
-    static final String GOLD = 'GOLD'
-
     Set<Card> cards = new HashSet<Card>()
-
-    Cards() {
-        load(new InputStreamReader(getClass().classLoader.getResourceAsStream('cards.csv')))
-    }
 
     void load(String data) {
         load( new StringReader( data ) )
@@ -36,5 +25,11 @@ class Cards {
             log.info( "Add ${card}" )
             cards.add( card )
         }
+    }
+    
+    static Cards getAll() {
+        Cards all = new Cards()
+        all.load(new InputStreamReader(Cards.class.classLoader.getResourceAsStream('cards.csv')))
+        return all
     }
 }

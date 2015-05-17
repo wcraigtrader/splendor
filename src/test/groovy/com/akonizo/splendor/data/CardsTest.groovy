@@ -19,7 +19,7 @@ class CardsTest extends Specification {
 
     def "Create all cards from data file"() {
         when:
-            Cards c = new Cards()
+            Cards c = Cards.getAll()
         then:
             90 == c.cards.size()
     }
