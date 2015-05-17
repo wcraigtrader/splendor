@@ -31,4 +31,10 @@ class Card {
 
         assert 0 <= value && value <= 5
     }
+    
+    int getWhite() { return counts[Gem.WHITE] }
+    int getBlue() { return counts[Gem.BLUE] }
+    int getGreen() { return counts[Gem.GREEN] }
+    int getRed() { return counts[Gem.RED] }
+    int getBlack() { return counts[Gem.BLACK] }
 }

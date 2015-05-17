@@ -11,11 +11,11 @@ class CardTest extends Specification {
             Deck.GREEN == card.deck
             Gem.BLACK == card.provides
             0 == card.value
-            1 == card.counts[Gem.WHITE]
-            1 == card.counts[Gem.BLUE]
-            1 == card.counts[Gem.GREEN]
-            1 == card.counts[Gem.RED]
-            0 == card.counts[Gem.BLACK]
+            1 == card.white
+            1 == card.blue
+            1 == card.green
+            1 == card.red
+            0 == card.black
     }
 
     def "Create card with value"() {
@@ -25,11 +25,11 @@ class CardTest extends Specification {
             Deck.BLUE == card.deck
             Gem.BLACK == card.provides
             3 == card.value
-            3 == card.counts[Gem.WHITE]
-            3 == card.counts[Gem.BLUE]
-            5 == card.counts[Gem.GREEN]
-            3 == card.counts[Gem.RED]
-            0 == card.counts[Gem.BLACK]
+            3 == card.white
+            3 == card.blue
+            5 == card.green
+            3 == card.red
+            0 == card.black
     }
 
 }
