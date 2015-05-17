@@ -1,11 +1,8 @@
 package com.akonizo.splendor.data
 
-import com.sun.org.apache.bcel.internal.generic.CPInstruction;
-import com.xlson.groovycsv.CsvParser
-
-import groovy.transform.EqualsAndHashCode
-import groovy.transform.ToString
 import groovy.util.logging.Slf4j
+
+import com.xlson.groovycsv.CsvParser
 
 @Slf4j
 class Cards {
