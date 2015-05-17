@@ -12,13 +12,13 @@ repositories {
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all'
-    compile 'com.xlson.groovycsv:groovycsv:1.0'
-//    compile ( 'com.orientechnologies:orientdb-graphdb' ) { exclude module:'commons-logging' }
     compile 'org.slf4j:slf4j-api'
+    compile 'com.xlson.groovycsv:groovycsv:1.0'
+    // compile ( 'com.orientechnologies:orientdb-graphdb' ) { exclude module:'commons-logging' }
 
-//    runtime 'org.slf4j:jcl-over-slf4j'
     runtime 'ch.qos.logback:logback-classic:1.1.3'
-
+    // runtime 'org.slf4j:jcl-over-slf4j'
+    
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.3'
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-core:1.3'
