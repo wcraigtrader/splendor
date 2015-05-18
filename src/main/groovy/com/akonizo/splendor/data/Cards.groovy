@@ -8,7 +8,7 @@ import com.xlson.groovycsv.CsvParser
 class Cards {
 
     /** Set of loaded cards */
-    Set<Card> cards = new HashSet<Card>()
+    Set<Card> cards = new LinkedHashSet<Card>()
 
     /** Load cards from a String */
     void load(String data) {
@@ -17,12 +17,12 @@ class Cards {
 
     /** Load cards from a Reader */
     void load(Reader stream) {
-        log.info( "Clearing stored cards" )
+        log.debug( "Clearing stored cards" )
         cards.clear()
 
         for ( row in CsvParser.parseCsv(stream) ) {
             def card = new Card( row.deck, row.produces, row.requires, row.value )
-            log.info( "Add ${card}" )
+            log.debug( "Add ${card}" )
             cards.add( card )
         }
     }

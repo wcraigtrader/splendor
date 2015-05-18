@@ -1,22 +1,26 @@
 package com.akonizo.splendor.data
 
 import groovy.transform.EqualsAndHashCode
-import groovy.transform.ToString
+import groovy.transform.Sortable
 
 @EqualsAndHashCode
-@ToString(includePackage=false)
+@Sortable(includes=['deck','value','provides','requires'])
 class Card {
 
     Deck deck
+    Integer value
     Gem provides
     String requires
-    int value
-    
+
     Map<Gem,Integer> counts = new HashMap<Gem,Integer>()
 
     /** Construct from strings, as found in a spreadsheet */
     Card( String d, String p, String r, String v='') {
-        this( Deck.values()[Integer.valueOf( d )-1], p.toUpperCase() as Gem, r, v ? Integer.valueOf( v ) : 0 )
+        this(
+        Deck.values()[Integer.valueOf( d )-1],
+        p.toUpperCase() as Gem,
+        r,
+        v ? Integer.valueOf( v ) : 0 )
     }
 
     /** Construct from objects */
@@ -25,16 +29,56 @@ class Card {
         provides = p
         requires = r
         value = v
-        
+
         Gem.values().each { gem -> counts[ gem ] = 0 }
         requires.each { ch -> counts[ Gem.get( ch ) ] += 1 }
 
         assert 0 <= value && value <= 5
     }
-    
-    int getWhite() { return counts[Gem.WHITE] }
-    int getBlue() { return counts[Gem.BLUE] }
-    int getGreen() { return counts[Gem.GREEN] }
-    int getRed() { return counts[Gem.RED] }
-    int getBlack() { return counts[Gem.BLACK] }
+
+    /** White gem cost */
+    int getWhite() {
+        return counts[Gem.WHITE]
+    }
+
+    /** Blue gem cost */
+    int getBlue() {
+        return counts[Gem.BLUE]
+    }
+
+    /** Green gem cost */
+    int getGreen() {
+        return counts[Gem.GREEN]
+    }
+
+    /** Red gem cost */
+    int getRed() {
+        return counts[Gem.RED]
+    }
+
+    /** Black gem cost */
+    int getBlack() {
+        return counts[Gem.BLACK]
+    }
+
+    String getShortRequires() {
+        StringBuilder sb = new StringBuilder()
+        Gem.values().each { gem ->
+            if (counts[gem] > 0) {
+                sb.append(  gem.abbrev )
+                if ( counts[gem] > 1) {
+                    sb.append(  counts[gem] )
+                }
+            }
+        }
+        return sb.toString()
+    }
+
+    String toString() {
+        if (value > 0) {
+            return "${deck}( ${shortRequires} >> ${provides}:$value )"
+        } else {
+            return "${deck}( ${shortRequires} >> ${provides} )"
+        }
+    }
 }
