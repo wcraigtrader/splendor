@@ -1,4 +1,7 @@
-plugins { id "com.github.tkruse.groovysh" version "1.0.5" }
+plugins { 
+    id "com.github.tkruse.groovysh" version "1.0.5" // shell
+    // id "net.carlosgsouza.console" version "1.0.1" // console might be more interesting, but conflicts with specifying a groovy version
+}
 
 apply plugin: 'groovy'
 apply plugin: 'application'
