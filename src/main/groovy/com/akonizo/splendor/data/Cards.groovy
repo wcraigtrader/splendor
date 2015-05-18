@@ -26,7 +26,12 @@ class Cards {
             cards.add( card )
         }
     }
-    
+
+    /** Find all matching cards */
+    Collection<Cards> findAll( Closure closure ) {
+        cards.findAll( closure )
+    }
+
     /** Load all cards from Splendor */
     static Cards getSplendor() {
         Cards all = new Cards()
