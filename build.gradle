@@ -1,42 +1,35 @@
 plugins { 
-    id "com.github.tkruse.groovysh" version "1.0.5" // shell
-    // id "net.carlosgsouza.console" version "1.0.1" // console might be more interesting, but conflicts with specifying a groovy version
+    id 'com.github.samueltbrown.cucumber' version '0.8' // Cucumber 
+    // id 'com.github.tkruse.groovysh' version '1.0.5' // shell
+    id 'net.carlosgsouza.console' version '1.0.1' // console
 }
 
-apply plugin: 'groovy'
-apply plugin: 'application'
-apply plugin: 'jacoco'
-apply plugin: 'eclipse'
-apply plugin: 'project-report'
+apply from: 'common.gradle'
 
 mainClassName = 'com.akonizo.splendor.Analysis'
+sourceCompatibility = 1.7
+version = '1.0'
 
-repositories { mavenCentral() }
+repositories { jcenter() }
+
+configurations {
+    all {
+        exclude group: 'commons-logging', module: 'commons-logging'
+    }
+}
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.10'
     compile 'org.slf4j:slf4j-api:1.7.12'
-    compile 'com.xlson.groovycsv:groovycsv:1.0'
-    // compile ( 'com.orientechnologies:orientdb-graphdb:2.0.9' ) { exclude module:'commons-logging' }
 
-    runtime 'ch.qos.logback:logback-classic:1.1.3'
-    // runtime 'org.slf4j:jcl-over-slf4j'
+    compile 'com.xlson.groovycsv:groovycsv:1.0'
+
+    //runtime 'ch.qos.logback:logback-classic:1.1.3' // SLF4J implementation
+    runtime 'org.slf4j:slf4j-simple:1.7.12'     // SLF4J implementation
+    runtime 'org.slf4j:jcl-over-slf4j:1.7.12'   // commons.logging used by many things
+    runtime 'org.slf4j:jul-to-slf4j:1.7.12'     // java.util.logging used by Groovy
 
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.3'
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-core:1.3'
-}
-
-// Disable Groovy optimizations when testing code coverage
-gradle.taskGraph.whenReady { graph ->
-    if (graph.hasTask(':jacocoTestReport')) {
-        println "Disabling Groovy Optimizations for code coverage"
-        compileGroovy.groovyOptions.optimizationOptions.all = false
-    }
-}
-
-task "create-dirs" << {
-    sourceSets*.java.srcDirs*.each { it.mkdirs() }
-    sourceSets*.groovy.srcDirs*.each { it.mkdirs() }
-    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
 }
