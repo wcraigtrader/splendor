@@ -1,5 +1,6 @@
 package com.akonizo.splendor.data
 
+/** Enumerate the colors of Gems */
 enum Gem {
     WHITE( 'W' ),
     BLUE( 'B' ),
@@ -7,26 +8,31 @@ enum Gem {
     RED( 'R' ),
     BLACK( 'K' )
 
+    /** Abbreviation character for each Gem color */
     final char abbrev
 
-    static final Map map
+    /** Map abbreviations to Gems */
+    static final Map abbreviations
 
     static {
-        map = [:] as HashMap
+        abbreviations = [:] as HashMap
         values().each { color ->
-            map.put( (Character) color.abbrev, color )
+            abbreviations.put( (Character) color.abbrev, color )
         }
     }
 
+    /** Construct a Gem */
     Gem ( String a ) {
         this.abbrev = a[0]
     }
 
+    /** Look up a Gem, by String */
     static get( String id ) {
         return get( (char) id[0] )
     }
 
+    /** Look up a Gem, by character */
     static get( Character id ) {
-        return map[ id.toUpperCase() ]
+        return abbreviations[ id.toUpperCase() ]
     }
 }
