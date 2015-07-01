@@ -11,24 +11,27 @@ class Card {
     Integer value
     Gem provides
     String requires
+    Integer ring
 
     Map<Gem,Integer> counts = new HashMap<Gem,Integer>()
 
     /** Construct from strings, as found in a spreadsheet */
-    Card( String d, String p, String r, String v='') {
+    Card( String d, String p, String r, String v='', String i='') {
         this(
         Deck.values()[Integer.valueOf( d )-1],
         p.toUpperCase() as Gem,
         r,
-        v ? Integer.valueOf( v ) : 0 )
+        v ? Integer.valueOf( v ) : 0,
+        i ? Integer.valueOf( i ) : 0 )
     }
 
     /** Construct from objects */
-    Card( Deck d, Gem p, String r, int v) {
+    Card( Deck d, Gem p, String r, int v, int i) {
         deck = d
         provides = p
         requires = r
         value = v
+        ring = i
 
         Gem.values().each { gem -> counts[ gem ] = 0 }
         requires.each { ch -> counts[ Gem.get( ch ) ] += 1 }

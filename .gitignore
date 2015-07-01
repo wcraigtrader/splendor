@@ -21,3 +21,4 @@ bin/
 # Temporary
 ~*
 .DS_Store
+*.svg

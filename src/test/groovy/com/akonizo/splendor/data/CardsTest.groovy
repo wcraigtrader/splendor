@@ -26,14 +26,14 @@ class CardsTest extends Specification {
     def "Create some cards from a string"() {
         when:
             c = new Cards()
-            c.load( """deck,produces,requires,value
-3,Black,RRRRRRRKKK,5
-3,Blue,WWWWWWWBBB,5
+            c.load( """deck,produces,requires,value,ring
+3,Black,RRRRRRRKKK,5,18
+3,Blue,WWWWWWWBBB,5,18
 """ )
         then:
             2 == c.cards.size()
-            new Card( Deck.BLUE, Gem.BLACK, 'RRRRRRRKKK', 5 ) in c.cards
-            new Card( '3', 'Blue', 'WWWWWWWBBB', '5' ) in c.cards
+            new Card( Deck.BLUE, Gem.BLACK, 'RRRRRRRKKK', 5, 18 ) in c.cards
+            new Card( '3', 'Blue', 'WWWWWWWBBB', '5', '18' ) in c.cards
     }
 
     def "Test the Splendor decks"() {
@@ -42,7 +42,7 @@ class CardsTest extends Specification {
 
         then:
             90 == c.cards.size()
-            90 == c.findAll( { true } ).size()
+            90 == c.findAll { true }.size()
 
             20 == c.findAll { it.deck == Deck.BLUE }.size()
             30 == c.findAll { it.deck == Deck.GOLD }.size()

@@ -21,7 +21,7 @@ class Cards {
         cards.clear()
 
         for ( row in CsvParser.parseCsv(stream) ) {
-            def card = new Card( row.deck, row.produces, row.requires, row.value )
+            def card = new Card( row.deck, row.produces, row.requires, row.value, row.ring )
             log.debug( "Add ${card}" )
             cards.add( card )
         }

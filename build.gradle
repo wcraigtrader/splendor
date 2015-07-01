@@ -23,7 +23,8 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.12'
 
     compile 'com.xlson.groovycsv:groovycsv:1.0'
-
+    compile 'org.jfree:jfreesvg:3.0'
+    
     //runtime 'ch.qos.logback:logback-classic:1.1.3' // SLF4J implementation
     runtime 'org.slf4j:slf4j-simple:1.7.12'     // SLF4J implementation
     runtime 'org.slf4j:jcl-over-slf4j:1.7.12'   // commons.logging used by many things
