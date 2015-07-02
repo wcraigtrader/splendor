@@ -39,6 +39,11 @@ class Card {
         assert 0 <= value && value <= 5
     }
 
+    /** Card gem cost */
+    int getCost() {
+        return requires.length()
+    }
+    
     /** White gem cost */
     int getWhite() {
         return counts[Gem.WHITE]

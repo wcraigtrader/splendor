@@ -3,7 +3,7 @@ package com.akonizo.splendor.data
 /** Enumerate the colors of Gems */
 enum Gem {
     WHITE( 'W','B','K', 0xffffff ),
-    BLUE(  'B','G','W', 0x000099 ),
+    BLUE(  'B','G','W', 0x0000cc ),
     GREEN( 'G','R','B', 0x009900 ),
     RED(   'R','K','G', 0x990000 ),
     BLACK( 'K','W','R', 0x000000 )
@@ -39,12 +39,12 @@ enum Gem {
     }
 
     /** Get the previous Gem in the color sequence */
-    def getPrev() {
+    Gem getPrev() {
         return Gem.get( preceding )
     }
     
     /** Get the next Gem in the color sequence */
-    def getSucc() {
+    Gem getSucc() {
         return Gem.get( succeeding )
     }
     
